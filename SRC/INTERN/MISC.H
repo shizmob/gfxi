@@ -1,0 +1,1 @@
+#define MISC_WAIT    0x5F     // Waits 600ns when written to via outp().

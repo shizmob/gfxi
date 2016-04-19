@@ -1,0 +1,27 @@
+CC=tcc
+CFLAGS=-2 -d -f- -G -O -Z -w -w-par -IINCLUDE -ISRC -nSRC
+LIB=tlib
+LIBFLAGS=/C
+OUTPUT=GFX.LIB
+
+!include MAKEFILE.COMMON
+
+########################################################
+
+.C.OBJ:
+	@echo [CC] $<
+	@$(CC) $(CFLAGS) -c $<
+	@echo [LINK] $@
+	@$(LIB) $(LIBFLAGS) $(OUTPUT) -+$@
+
+########################################################
+
+all: $(OUTPUT)
+
+clean:
+	@echo [CLEAN] *.OBJ
+	@del SRC\*.OBJ
+	@echo [CLEAN] $(OUTPUT)
+	@del $(OUTPUT)
+
+$(OUTPUT): $(OBJECTS)

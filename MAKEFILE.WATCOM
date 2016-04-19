@@ -1,0 +1,27 @@
+CC=wcc
+CFLAGS=-2 -bt=dos -d0 -ecf -i=INCLUDE -i=SRC -obhil+rtz -q -w3 -wcd=138
+LIB=wlib
+LIBFLAGS=/b /c /q /s
+OUTPUT=GFX.LIB
+
+!include MAKEFILE.COMMON
+
+########################################################
+
+.C.OBJ:
+	@echo [CC] $<
+	@$(CC) $(CFLAGS) -fo=$@ $<
+	@echo [LINK] $@
+	@$(LIB) $(LIBFLAGS) $(OUTPUT) -+$@
+
+########################################################
+
+all: $(OUTPUT)
+
+clean:
+	@echo [CLEAN] *.obj
+	@del src\*.obj
+	@echo [CLEAN] $(OUTPUT)
+	@del $(OUTPUT)
+
+$(OUTPUT): $(OBJECTS)
